@@ -4,8 +4,8 @@
 
 
 
-
-Big_Number &operator*(Big_Number &BN, Big_Number & BN2)
+//暴力求解
+/*Big_Number &operator*(Big_Number &BN, Big_Number & BN2)
 {
 	static Big_Number temp;
 	if (temp.num != NULL)
@@ -34,6 +34,20 @@ Big_Number &operator*(Big_Number &BN, Big_Number & BN2)
 		break;
 	default:
 		break;
+	}
+	if (BN.sign || BN2.sign)
+		temp.sign = 1;
+	return temp;
+}*/
+
+//分治法求解
+Big_Number &operator*(Big_Number &BN, Big_Number & BN2)
+{
+	static Big_Number temp;
+	if (temp.num != NULL)
+	{
+		delete[]temp.num;
+		temp.num_length = 0;
 	}
 	return temp;
 }
@@ -243,6 +257,23 @@ Big_Number &operator+(Big_Number &BN,Big_Number & BN2)
 			temp = BN - tmp;
 		}
 	}
+	return temp;
+}
+
+Big_Number &Big_Number::get_sub(int start, int end)		//取一个数中间的几位数
+{
+	static Big_Number temp;
+	if (temp.num != NULL) {
+		delete[]temp.num;
+		temp.num = NULL;
+		temp.num_length = 0;
+	}
+	if (end <= start)
+		return temp;
+	temp.num_length = end - start+1;
+	temp.num = new bool[temp.num_length];
+	memcpy(temp.num, num + start, temp.num_length);
+	temp.sign = sign;
 	return temp;
 }
 

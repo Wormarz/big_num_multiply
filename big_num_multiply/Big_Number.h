@@ -8,6 +8,7 @@ using namespace std;
 class Big_Number
 {
 public:
+	Big_Number& get_sub(int start, int end);
 	friend Big_Number &operator-(Big_Number &BN, Big_Number & BN2);
 	friend ostream& operator<<(ostream &os, Big_Number &BN);
 	friend Big_Number &operator*(Big_Number& BN,Big_Number& BN2);
